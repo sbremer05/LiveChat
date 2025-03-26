@@ -67,7 +67,7 @@ public class Server {
 //                Get username from client
                 out.println("Enter your username:");
                 username = in.readLine();
-                System.out.println("Username: " + username + " saved.");
+                System.out.println("User " + username + " is conected to the server.");
                 out.println("Welcome to the server " + username + "!");
                 out.println("Type your message:");
 
