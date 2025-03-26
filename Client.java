@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Client {
     private static final String SERVER_ADRESS = "localhost";
-    private static final int SERVER_PORT = 5000;
+    private static final int SERVER_PORT = 14253;
 
     public static void main(String[] args) {
         try {
@@ -12,7 +12,7 @@ public class Client {
             System.out.println("Connected to char server!");
 
 //            Set up input and output streams
-            PrintWrite out = new PrintWrite(socket.getOutputSteam(), true);
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             new Thread(() -> {

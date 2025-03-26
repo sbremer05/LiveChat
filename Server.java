@@ -4,7 +4,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Scanner;
 
 public class Server {
-    private static final int PORT = 5000;
+    private static final int PORT = 14253;
     private static CopyOnWriteArrayList<ClientHandler> clients = new CopyOnWriteArrayList<>();
 
     public static void main(String[] args) {
@@ -39,7 +39,7 @@ public class Server {
     public static void broadcast(String message, ClientHandler sender) {
         for(ClientHandler client : clients) {
             if(client != sender) {
-                cliend.sendMessage(message);
+                client.sendMessage(message);
             }
         }
     }
@@ -54,8 +54,8 @@ public class Server {
         public ClientHandler(Socket clientSocket) {
             this.clientSocket = clientSocket;
             try {
-                out = new PrintWriter(clientSocket.getOutputSteam(), true);
-                in = new BufferedReader(new InputStreamReader(clientSocket.getInputSteam()));
+                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             } catch(IOException e) {
                 e.printStackTrace();
             }
@@ -72,7 +72,7 @@ public class Server {
                 out.println("Type your message:");
 
                 String inputLine;
-                while((inputLine = in.readLine) != null) {
+                while((inputLine = in.readLine()) != null) {
                     System.out.println("[" + username + "]: " + inputLine);
                     broadcast("[" + username + "]: " + inputLine, this);
                 }
